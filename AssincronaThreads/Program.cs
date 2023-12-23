@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 
 internal class Program
 {
@@ -40,6 +41,30 @@ internal class Program
         t1.Join();
         t2.Join();
         t3.Join();
+    }
+
+    static void ExecutarComTasks()
+    {
+        var t1 = Task<int>.Run(() =>
+        {
+            RealizarOperacao(1, "Adriano", "Cordeiro");
+            return 1;
+        });
+        var t2 = Task<int>.Run(() =>
+        {
+            RealizarOperacao(2, "Sandra", "Pinheiro");
+            return 2;
+        });
+        var t3 = Task<int>.Run(() =>
+        {
+            RealizarOperacao(3, "Fabio", "Alencar");
+            return 3;
+        });
+
+        Console.WriteLine($"Tarefa {t1.Result} finalizada");
+        Console.WriteLine($"Tarefa {t2.Result} finalizada");
+        Console.WriteLine($"Tarefa {t3.Result} finalizada");
+        ;
     }
     static void RealizarOperacao(int op, string nome, string segundoNome)
     {
